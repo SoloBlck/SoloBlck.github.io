@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Configuration Gemini
-const GEMINI_API_KEY = 'AIzaSyB1vDtHhTvhiNAVZABPvWGLcYZfTCPWFQk';
+const GEMINI_API_KEY = 'AIzaSyC5R7zJ7dm6PBKFiW_Z-AJZTtrCiUvbuDg';
 
 // Stockage des conversations (en mémoire)
 const conversations = new Map();
