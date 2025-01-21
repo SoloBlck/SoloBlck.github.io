@@ -6,13 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Configuration Gemini
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-if (!GEMINI_API_KEY) {
-    console.error('\x1b[31mErreur : La clé API Gemini n\'est pas définie dans le fichier .env\x1b[0m');
-    console.log('\x1b[33mVeuillez créer un fichier .env à la racine du projet avec le contenu suivant :\x1b[0m');
-    console.log('\x1b[36mGEMINI_API_KEY=votre_clé_api_ici\x1b[0m');
-    process.exit(1);
-}
+const GEMINI_API_KEY = 'AIzaSyB1vDtHhTvhiNAVZABPvWGLcYZfTCPWFQk';
 
 // Stockage des conversations (en mémoire)
 const conversations = new Map();
