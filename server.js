@@ -59,27 +59,28 @@ Réponds à ce dernier message en tenant compte de tout le contexte de la conver
         });
 
         if (!response.ok) {
-            throw new Error(`Erreur HTTP: ${response.status}`);
+            console.error('Erreur API Gemini:', await response.text());
+            throw new Error(`Erreur API Gemini: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('Réponse Gemini:', JSON.stringify(data, null, 2));
-
-        if (!data || !data.candidates || !data.candidates[0] || !data.candidates[0].content) {
-            throw new Error('Format de réponse invalide de Gemini');
+        
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts || !data.candidates[0].content.parts[0]) {
+            console.error('Réponse API invalide:', data);
+            throw new Error('Format de réponse API invalide');
         }
 
-        const responseText = data.candidates[0].content.parts?.[0]?.text || "Miaou... Je suis un peu confus là 😅";
+        const aiResponse = data.candidates[0].content.parts[0].text;
         
         // Ajouter la réponse à l'historique
-        conversation.push({ role: 'assistant', content: responseText });
+        conversation.push({ role: 'assistant', content: aiResponse });
         
-        // Limiter la taille de l'historique pour éviter une utilisation excessive de la mémoire
-        if (conversation.length > 20) {
-            conversation.splice(0, 2); // Supprimer les 2 plus anciens messages
+        // Limiter la taille de l'historique
+        if (conversation.length > 10) {
+            conversation.splice(0, conversation.length - 10);
         }
         
-        res.json({ response: responseText, sessionId });
+        res.json({ response: aiResponse, sessionId });
     } catch (error) {
         console.error('Erreur Gemini détaillée:', error);
         res.status(500).json({ error: "Miaou... (Erreur de communication) 😿" });
