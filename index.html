@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Pixel Art</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Chat MiawMiaw</h1>
+            <div id="status-indicator">Microphone inactif</div>
+        </div>
+        <div class="chat-messages" id="messageArea">
+            <!-- Les messages apparaîtront ici -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Écrivez ou parlez...">
+            <div class="cat-container">
+                <div class="speech-bubble">
+                    <p id="cat-speech">MEOW!</p>
+                </div>
+                <img src="images/cat.gif" alt="Chat pixel art" class="cat-gif">
+            </div>
+            <button id="micButton" class="mic-button">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button id="sendButton">Envoyer</button>
+        </div>
+    </div>
+    <div class="signature">
+        Fait par Antoine Pour titi <img src="images/coeur.gif" alt="Pixel heart" class="heart-gif">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
