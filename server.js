@@ -12,7 +12,7 @@ const GEMINI_API_KEY = 'AIzaSyB1vDtHhTvhiNAVZABPvWGLcYZfTCPWFQk';
 const conversations = new Map();
 
 app.use(cors({
-    origin: ['https://cookie-le-chat.onrender.com', 'http://localhost:1000'],
+    origin: ['https://cookie-le-chat.onrender.com', 'http://localhost:10000'],
     methods: ['GET', 'POST'],
     credentials: true
 }));

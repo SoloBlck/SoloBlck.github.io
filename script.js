@@ -19,7 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour faire parler le chat via l'API Node.js
     async function getChatGPTResponse(message) {
         try {
-            const response = await fetch('http://localhost:3000/chat', {
+            const apiUrl = window.location.hostname === 'localhost' 
+                ? 'http://localhost:10000/chat'
+                : 'https://cookie-le-chat-api.onrender.com/chat';
+                
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
