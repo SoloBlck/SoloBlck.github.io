@@ -6,8 +6,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Configuration Gemini
-if (!process.env.GEMINI_API_KEY) {
-    console.error('Erreur : La clé API Gemini n\'est pas définie dans le fichier .env');
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+if (!GEMINI_API_KEY) {
+    console.error('\x1b[31mErreur : La clé API Gemini n\'est pas définie dans le fichier .env\x1b[0m');
+    console.log('\x1b[33mVeuillez créer un fichier .env à la racine du projet avec le contenu suivant :\x1b[0m');
+    console.log('\x1b[36mGEMINI_API_KEY=votre_clé_api_ici\x1b[0m');
     process.exit(1);
 }
 
@@ -15,7 +18,7 @@ if (!process.env.GEMINI_API_KEY) {
 const conversations = new Map();
 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' ? 'https://votre-domaine.com' : 'http://localhost:3000'
+    origin: process.env.NODE_ENV === 'production' ? 'https://soloblck.github.io/' : 'http://localhost:3000'
 }));
 app.use(express.json());
 app.use(express.static('.')); // Servir les fichiers statiques
@@ -39,7 +42,7 @@ app.post('/chat', async (req, res) => {
             `${msg.role === 'user' ? 'Tehani' : 'Cookie'}: ${msg.content}`
         ).join('\n');
 
-        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + process.env.GEMINI_API_KEY, {
+        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + GEMINI_API_KEY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
