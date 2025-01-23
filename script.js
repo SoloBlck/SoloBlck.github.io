@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Générer un ID de session unique
     const sessionId = 'session_' + Date.now();
 
-    // Fonction pour faire parler le chat via l'API Node.js
-    async function getChatGPTResponse(message) {
+    // Fonction pour faire parler le chat via l'API Gemini
+    async function getGeminiResponse(message) {
         try {
             const response = await fetch('https://cookie-le-chat.onrender.com/chat', {
                 method: 'POST',
@@ -60,10 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fonction pour faire parler le chat
     async function makeCatSpeak(message) {
-        const response = await getChatGPTResponse(message);
-        catSpeech.textContent = response;
-        addMessage(response, 'received');
-        animateCatTalking(response, 2000);
+        try {
+            const response = await getGeminiResponse(message);
+            catSpeech.textContent = response;
+            addMessage(response, 'received');
+            animateCatTalking(response, 2000);
+        } catch (error) {
+            console.error('Erreur de communication:', error);
+            catSpeech.textContent = "Miaou... (Erreur de communication) 😿\nEssaie de me reparler dans quelques instants !";
+            addMessage("Miaou... (Erreur de communication) 😿\nEssaie de me reparler dans quelques instants !", 'received');
+            animateCatTalking("Miaou... (Erreur de communication) 😿\nEssaie de me reparler dans quelques instants !", 2000);
+        }
     }
 
     // Gestion de l'envoi de message
